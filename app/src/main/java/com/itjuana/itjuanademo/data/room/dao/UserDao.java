@@ -20,7 +20,7 @@ import io.reactivex.Flowable;
 @Dao
 public abstract class UserDao {
 
-    @Query("SELECT * FROM MESSAGE_TABLE WHERE 1")
+    @Query("SELECT * FROM USER_TABLE WHERE 1")
     public abstract Flowable<List<UserEntity>> getAllList();
 
     @Transaction
