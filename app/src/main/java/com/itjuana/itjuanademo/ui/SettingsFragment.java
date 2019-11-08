@@ -22,8 +22,8 @@ import butterknife.ButterKnife;
 
 public class SettingsFragment extends Fragment {
 
-    @BindView(R.id.btnSave)
-    Button btnSave;
+    @BindView(R.id.btSave)
+    Button btSave;
 
     @BindView(R.id.etName)
     EditText etName;
@@ -46,10 +46,10 @@ public class SettingsFragment extends Fragment {
 
         ButterKnife.bind(this, view);
 
-        btnSend.setOnClickListener(v -> {
+        btSave.setOnClickListener(v -> {
             String name = etName.getText().toString().trim();
             String description = etDescription.getText().toString().trim();
-            if (name.length() > 2 && description.length() > 2) {
+            if (name.length() > 1 && description.length() > 1) {
                 mainViewModel.addUser(name, description);
                 Toast.makeText(requireContext(), "data sent", Toast.LENGTH_SHORT).show();
             } else {
