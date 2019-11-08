@@ -57,6 +57,8 @@ public class AddNewMessageDialog extends DialogFragment {
 
         btnSend.setOnClickListener(v -> {
             mainViewModel.sendMessage(etMessage.getText().toString());
+            dismiss();
+
         });
 
         etMessage.addTextChangedListener(new TextWatcher() {

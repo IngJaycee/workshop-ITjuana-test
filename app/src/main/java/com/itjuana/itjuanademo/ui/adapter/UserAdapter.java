@@ -7,6 +7,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.itjuana.itjuanademo.R;
@@ -36,7 +37,7 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ListViewHolder
     @NonNull
     @Override
     public ListViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_list, null, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_user, null, false);
         return new ListViewHolder(view);
     }
 
@@ -59,8 +60,6 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ListViewHolder
     }
 
     class ListViewHolder extends RecyclerView.ViewHolder {
-        @BindView(R.id.linearItem)
-        LinearLayout linearItem;
 
         @BindView(R.id.tvUser)
         TextView tvUser;
@@ -75,13 +74,11 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ListViewHolder
 
         public void bindItems(UserEntity userEntity, OnUserClickedListener onMessageClickedListener) {
             tvUser.setText(userEntity.getName());
-            tvMessage.setText(userEntity.getDescription());
             itemView.setOnClickListener(v -> {
                 onMessageClickedListener.OnCLick(userEntity);
             });
 
         }
+
     }
-
-
 }

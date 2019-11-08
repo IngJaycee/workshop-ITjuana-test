@@ -14,15 +14,15 @@ import org.jetbrains.annotations.NotNull;
  */
 @Entity(tableName = "MESSAGE_TABLE")
 public class MessageEntity {
-    @NonNull
+
     @PrimaryKey()
-    private String id;
+    private long id;
 
     private String body;
 
     private String name;
 
-    public MessageEntity(@NotNull String id, String body, String name) {
+    public MessageEntity(long id, String body, String name) {
         this.id = id;
         this.body = body;
         this.name = name;
@@ -39,11 +39,11 @@ public class MessageEntity {
                 '}';
     }
 
-    public String getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(long id) {
         this.id = id;
     }
 

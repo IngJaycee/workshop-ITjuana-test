@@ -59,8 +59,6 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ListViewHolder
     }
 
     class ListViewHolder extends RecyclerView.ViewHolder {
-        @BindView(R.id.linearItem)
-        LinearLayout linearItem;
 
         @BindView(R.id.tvUser)
         TextView tvUser;

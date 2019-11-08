@@ -18,7 +18,7 @@ import com.itjuana.itjuanademo.data.room.entity.UserEntity;
  * Andromeda
  */
 
-@Database(entities = {MessageEntity.class, UserEntity.class}, version = 1, exportSchema = false)
+@Database(entities = {MessageEntity.class, UserEntity.class}, version = 2, exportSchema = false)
 public abstract class MainDatabase extends RoomDatabase {
     private static volatile MainDatabase INSTANCE;
 
@@ -32,6 +32,7 @@ public abstract class MainDatabase extends RoomDatabase {
                 if (INSTANCE == null) {
                     INSTANCE = Room
                             .databaseBuilder(context.getApplicationContext(), MainDatabase.class, "Main_Database.db")
+                            .fallbackToDestructiveMigration()
                             .build();
                 }
             }

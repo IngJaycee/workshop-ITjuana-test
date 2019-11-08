@@ -31,11 +31,11 @@ public class MainViewModel extends AndroidViewModel {
         repository.requestAllUsers();
         repository.requestAllMessages();
         DEVICE_ID = PrivateId.getPrivateID(application);
-//        addUser(/*PrivateId.getPrivateID(application.getApplicationContext())*/1, "JC", "ITJuana Software Engineer");
+        addUser("Undefined", "WorkShoper Atendee.");
     }
 
     public void sendMessage(String messageStr) {
-        repository.insertMessage(new MessageEntity(DEVICE_ID, messageStr, "JC"));
+        repository.insertMessage(new MessageEntity(0, messageStr, "JC"));
     }
 
     public Flowable<List<MessageEntity>> getAllMessages() {
@@ -46,7 +46,7 @@ public class MainViewModel extends AndroidViewModel {
         return repository.getAllUsers();
     }
 
-    public void addUser(int id, String name, String description) {
+    public void addUser(String name, String description) {
         repository.addUser(new UserEntity(DEVICE_ID, name, description));
     }
 
