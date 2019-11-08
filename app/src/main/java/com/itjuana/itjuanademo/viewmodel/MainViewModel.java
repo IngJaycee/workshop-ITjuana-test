@@ -5,6 +5,7 @@ import android.app.Application;
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 
+import com.itjuana.itjuanademo.common.PrivateId;
 import com.itjuana.itjuanademo.data.room.entity.MessageEntity;
 import com.itjuana.itjuanademo.data.room.entity.UserEntity;
 import com.itjuana.itjuanademo.repository.MainRepository;
@@ -22,17 +23,19 @@ import io.reactivex.Flowable;
 public class MainViewModel extends AndroidViewModel {
 
     private MainRepository repository;
+    private volatile String DEVICE_ID;
 
     public MainViewModel(@NonNull Application application) {
         super(application);
         repository = new MainRepository(application);
         repository.requestAllUsers();
         repository.requestAllMessages();
+        DEVICE_ID = PrivateId.getPrivateID(application);
 //        addUser(/*PrivateId.getPrivateID(application.getApplicationContext())*/1, "JC", "ITJuana Software Engineer");
     }
 
     public void sendMessage(String messageStr) {
-        repository.insertMessage(new MessageEntity(messageStr, "JC"));
+        repository.insertMessage(new MessageEntity(DEVICE_ID, messageStr, "JC"));
     }
 
     public Flowable<List<MessageEntity>> getAllMessages() {
@@ -44,7 +47,7 @@ public class MainViewModel extends AndroidViewModel {
     }
 
     public void addUser(int id, String name, String description) {
-        repository.addUser(new UserEntity(id, name, description));
+        repository.addUser(new UserEntity(DEVICE_ID, name, description));
     }
 
     @Override

@@ -5,6 +5,8 @@ import androidx.room.Entity;
 import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 
+import org.jetbrains.annotations.NotNull;
+
 /**
  * Created by jutorres on 11/2019.
  * Insulet Corporation
@@ -12,15 +14,16 @@ import androidx.room.PrimaryKey;
  */
 @Entity(tableName = "MESSAGE_TABLE")
 public class MessageEntity {
-
-    @PrimaryKey(autoGenerate = true)
-    private int id;
+    @NonNull
+    @PrimaryKey()
+    private String id;
 
     private String body;
 
     private String name;
 
-    public MessageEntity(String body, String name) {
+    public MessageEntity(@NotNull String id, String body, String name) {
+        this.id = id;
         this.body = body;
         this.name = name;
     }
@@ -36,11 +39,11 @@ public class MessageEntity {
                 '}';
     }
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 
