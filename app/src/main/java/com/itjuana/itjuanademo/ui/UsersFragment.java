@@ -1,8 +1,10 @@
 package com.itjuana.itjuanademo.ui;
 
 
+import android.graphics.Rect;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
@@ -53,6 +55,16 @@ public class UsersFragment extends Fragment {
 
         recyclerList.setAdapter(userAdapter);
         recyclerList.setLayoutManager(new LinearLayoutManager(requireContext()));
+        recyclerList.addItemDecoration(new RecyclerView.ItemDecoration() {
+            @Override
+            public void getItemOffsets(@NonNull Rect outRect, @NonNull View view, @NonNull RecyclerView parent, @NonNull RecyclerView.State state) {
+                super.getItemOffsets(outRect, view, parent, state);
+                outRect.bottom = 10;
+                outRect.left = 10;
+                outRect.right = 10;
+                outRect.top = 15 /*space / 2 */;
+            }
+        });
         Disposable disposable = mainViewModel.getAllUsers()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())

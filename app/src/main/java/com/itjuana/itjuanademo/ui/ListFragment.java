@@ -1,17 +1,22 @@
 package com.itjuana.itjuanademo.ui;
 
 
+import android.graphics.Canvas;
+import android.graphics.Rect;
 import android.os.Bundle;
 
 import androidx.activity.OnBackPressedCallback;
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.navigation.Navigation;
+import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.util.Log;
+import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -67,6 +72,16 @@ public class ListFragment extends Fragment {
         });
         recyclerList.setLayoutManager(new LinearLayoutManager(requireContext()));
         recyclerList.setAdapter(listAdapter);
+        recyclerList.addItemDecoration(new RecyclerView.ItemDecoration() {
+            @Override
+            public void getItemOffsets(@NonNull Rect outRect, @NonNull View view, @NonNull RecyclerView parent, @NonNull RecyclerView.State state) {
+                super.getItemOffsets(outRect, view, parent, state);
+                outRect.bottom = 10;
+                outRect.left = 10;
+                outRect.right = 10;
+                outRect.top = 15 /*space / 2 */;
+            }
+        });
 
         Disposable disposable = mainViewModel.getAllMessages()
                 .subscribeOn(Schedulers.io())
