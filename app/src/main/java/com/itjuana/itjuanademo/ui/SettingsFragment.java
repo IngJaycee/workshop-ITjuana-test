@@ -45,6 +45,9 @@ public class SettingsFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        refreshView(container);
+
+
         View view = inflater.inflate(R.layout.fragment_settings, container, false);
 
         ButterKnife.bind(this, view);
@@ -74,6 +77,11 @@ public class SettingsFragment extends Fragment {
                     }
                 }, Throwable::printStackTrace);
         return view;
+    }
+
+    private void refreshView(ViewGroup mScrollView) {
+        mScrollView.setVisibility(View.GONE);
+        mScrollView.setVisibility(View.VISIBLE);
     }
 
 }
