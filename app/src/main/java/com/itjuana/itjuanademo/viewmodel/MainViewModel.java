@@ -13,6 +13,7 @@ import com.itjuana.itjuanademo.repository.MainRepository;
 import java.util.List;
 
 import io.reactivex.Flowable;
+import io.reactivex.Single;
 
 
 /**
@@ -24,6 +25,7 @@ public class MainViewModel extends AndroidViewModel {
 
     private MainRepository repository;
     private volatile String DEVICE_ID;
+    String UserName = "Undefined";
 
     public MainViewModel(@NonNull Application application) {
         super(application);
@@ -31,7 +33,6 @@ public class MainViewModel extends AndroidViewModel {
         repository.requestAllUsers();
         repository.requestAllMessages();
         DEVICE_ID = PrivateId.getPrivateID(application);
-        addUser("Undefined", "WorkShoper Atendee.");
     }
 
     public void sendMessage(String messageStr) {
@@ -48,6 +49,10 @@ public class MainViewModel extends AndroidViewModel {
 
     public void addUser(String name, String description) {
         repository.addUser(new UserEntity(DEVICE_ID, name, description));
+    }
+
+    public Single<UserEntity> getSelfUser (){
+        return repository.getSelfUser(DEVICE_ID);
     }
 
     @Override

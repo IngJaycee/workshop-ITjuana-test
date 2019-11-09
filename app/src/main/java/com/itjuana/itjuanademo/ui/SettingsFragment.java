@@ -19,6 +19,9 @@ import com.itjuana.itjuanademo.viewmodel.MainViewModel;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.Disposable;
+import io.reactivex.schedulers.Schedulers;
 
 public class SettingsFragment extends Fragment {
 
@@ -53,9 +56,23 @@ public class SettingsFragment extends Fragment {
                 mainViewModel.addUser(name, description);
                 Toast.makeText(requireContext(), "data sent", Toast.LENGTH_SHORT).show();
             } else {
-                Toast.makeText(requireContext(), "please fill all fealds with at least 2 chars", Toast.LENGTH_SHORT).show();
+                Toast.makeText(requireContext(), "please fill all fiealds with at least 2 chars", Toast.LENGTH_SHORT).show();
             }
         });
+
+        Disposable disposable = mainViewModel.getSelfUser()
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(self -> {
+                    if (self != null) {
+                        if (!self.getName().isEmpty() && !self.getName().equals(etName.getText().toString())) {
+                            etName.setText(self.getName());
+                        }
+                        if (!self.getDescription().isEmpty() && !self.getDescription().equals(etDescription.getText().toString())) {
+                            etDescription.setText(self.getDescription());
+                        }
+                    }
+                }, Throwable::printStackTrace);
         return view;
     }
 

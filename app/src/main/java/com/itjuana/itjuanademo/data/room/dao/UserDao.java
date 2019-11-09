@@ -11,6 +11,7 @@ import com.itjuana.itjuanademo.data.room.entity.UserEntity;
 import java.util.List;
 
 import io.reactivex.Flowable;
+import io.reactivex.Single;
 
 /**
  * Created by jutorres on 11/2019.
@@ -34,4 +35,7 @@ public abstract class UserDao {
 
     @Query("DELETE FROM USER_TABLE")
     public abstract void deleteAllUsers();
+
+    @Query("SELECT * FROM USER_TABLE WHERE id = :DEVICE_ID ORDER BY id DESC LIMIT 1")
+    public abstract Single<UserEntity> getSelfUser(String DEVICE_ID);
 }

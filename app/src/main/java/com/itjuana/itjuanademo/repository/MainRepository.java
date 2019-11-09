@@ -19,6 +19,7 @@ import javax.inject.Inject;
 
 import io.reactivex.Flowable;
 import io.reactivex.Observable;
+import io.reactivex.Single;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
@@ -108,6 +109,10 @@ public class MainRepository {
                     Log.d(TAG, "addUser: " + s.toString());
 
                 }, Throwable::printStackTrace);
+    }
+
+    public Single<UserEntity> getSelfUser(String DEVICE_ID){
+        return userDao.getSelfUser(DEVICE_ID);
     }
 
 

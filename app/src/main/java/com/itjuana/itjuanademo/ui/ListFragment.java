@@ -106,7 +106,6 @@ public class ListFragment extends Fragment {
                 Log.d(TAG, "handleOnBackPressed: ");
                 Snackbar snackbar = Snackbar.make(view, "do you want to exit?", Snackbar.LENGTH_LONG);
                 snackbar.setAction("YES", v -> {
-
                     remove();
                     Navigation.findNavController(view).popBackStack(R.id.listFragment, true);
                     requireActivity().onBackPressed();
